@@ -3,7 +3,7 @@
 1. Клонирование проекта:
 	
 	```bash
-	git clone https://EminAliev@bitbucket.org/EminAliev/datasets.git
+	git clone https://github.com/privetiGang/moreBack.git
 	cd datasets
 	```
 
