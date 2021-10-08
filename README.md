@@ -4,7 +4,6 @@
 	
 	```bash
 	git clone https://github.com/privetiGang/moreBack.git
-	cd datasets
 	```
 
 2. Создание нового virtualenv:
