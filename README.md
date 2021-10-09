@@ -37,9 +37,9 @@
 6. URLS:
 
 	```python
-	127.0.0.1:8000/api/metafields/
-	127.0.0.1:8000/api/mts/
-	127.0.0.1:8000/api/adidas/
-        127.0.0.1:8000/api/magazine/
+	127.0.0.1:8000/metafields/
+	127.0.0.1:8000/mts/
+	127.0.0.1:8000/adidas/
+        127.0.0.1:8000/magazine/
 	127.0.0.1:8000/magazine-dataset/sort/?attributes={сюда атрибут}
 	```
