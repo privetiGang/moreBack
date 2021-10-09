@@ -1,3 +1,5 @@
+from django.core import serializers
+from django.http import HttpResponse
 from rest_framework import generics, viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -101,3 +103,18 @@ def save_json(request):
     body = request.body.decode('utf-8')
     model = JsonData.objects.create(json=body)
     return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def select_datasets(request):
+    id = request.GET.get("id")
+    if id == '1':
+        queryset = Mts.objects.all()[:5]
+        data = serializers.serialize('json', queryset)
+    elif id == '2':
+        queryset = Magazine.objects.all()[:5]
+        data = serializers.serialize('json', queryset)
+    elif id == '3':
+        queryset = Adidas.objects.all()[:5]
+        data = serializers.serialize('json', queryset)
+    return HttpResponse(data, content_type="application/json")
