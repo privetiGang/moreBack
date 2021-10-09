@@ -2,9 +2,9 @@ from rest_framework import generics, viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from base.models import Dict, MetaFields, Mts, Magazine, Adidas
+from base.models import Dict, MetaFields, Mts, Magazine, Adidas, FavouriteDatasets
 from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer, \
-    MetaFieldsSerializerFilter
+    MetaFieldsSerializerFilter, FavouriteDatasetsSerializer
 from mozilla_django_oidc.views import OIDCLogoutView
 from django.conf import settings
 from django_filters.rest_framework import DjangoFilterBackend
@@ -87,3 +87,15 @@ def buy_datasets(request):
     model.payable = 0
     model.save()
     return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def favourite_datasets(request):
+    id = request.GET.get("id")
+    favourite = FavouriteDatasets.objects.create(metafields_id=id)
+    return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)
+
+
+class FavouriteDatasetsView(generics.ListAPIView):
+    serializer_class = FavouriteDatasetsSerializer
+    queryset = FavouriteDatasets.objects.all()

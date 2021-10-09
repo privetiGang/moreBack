@@ -20,6 +20,7 @@ class MetaFields(models.Model):
     quality = models.CharField(max_length=10)
     type = models.TextField()
 
+
 class Mts(models.Model):
     contacts = models.TextField()
     sum = models.IntegerField()
@@ -40,4 +41,8 @@ class Adidas(models.Model):
     date = models.DateField()
     sex = models.TextField()
     age = models.IntegerField()
+    metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
+
+
+class FavouriteDatasets(models.Model):
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
