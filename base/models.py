@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Dict(models.Model):
@@ -8,13 +9,15 @@ class Dict(models.Model):
 
 class MetaFields(models.Model):
     name = models.TextField()
-    dates = models.TextField()
+    date_start = models.DateField(default=timezone.now)
+    date_finish = models.DateField(default=timezone.now)
     fields = models.TextField()
     description = models.TextField()
     size = models.TextField()
     completenes = models.IntegerField()
     payable = models.TextField()
     visible = models.BooleanField()
+    quality = models.CharField(max_length=10)
 
 
 class Mts(models.Model):
@@ -23,11 +26,13 @@ class Mts(models.Model):
     date = models.DateField()
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
 
+
 class Magazine(models.Model):
     fio = models.TextField()
     phone_number = models.TextField()
     address = models.TextField()
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
+
 
 class Adidas(models.Model):
     contacts = models.TextField()
@@ -36,4 +41,3 @@ class Adidas(models.Model):
     sex = models.TextField()
     age = models.IntegerField()
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
-
