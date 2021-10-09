@@ -46,3 +46,7 @@ class Adidas(models.Model):
 
 class FavouriteDatasets(models.Model):
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
+
+
+class JsonData(models.Model):
+    json = models.TextField()

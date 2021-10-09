@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from base.models import Dict, MetaFields, Mts, Magazine, Adidas, FavouriteDatasets
+from base.models import Dict, MetaFields, Mts, Magazine, Adidas, FavouriteDatasets, JsonData
 from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer, \
     MetaFieldsSerializerFilter, FavouriteDatasetsSerializer
 from mozilla_django_oidc.views import OIDCLogoutView
@@ -29,16 +29,11 @@ class DictDeleteView(generics.RetrieveDestroyAPIView):
 
 
 def keycloak_logout(request):
-    """ Ths method is used to retrieve logout endpoint to also end the keycloak session as well as the Django session.
-    """
     logout_endpoint = settings.OIDC_OP_LOGOUT_ENDPOINT
     return logout_endpoint + "?redirect_uri=" + request.build_absolute_uri(settings.LOGOUT_REDIRECT_URL)
 
 
 class LogoutView(OIDCLogoutView):
-    """ Extend standard logout view to include get method (called from URL)
-    """
-
     def get(self, request):
         return self.post(request)
 
@@ -99,3 +94,10 @@ def favourite_datasets(request):
 class FavouriteDatasetsView(generics.ListAPIView):
     serializer_class = FavouriteDatasetsSerializer
     queryset = FavouriteDatasets.objects.all()
+
+
+@api_view(['POST'])
+def save_json(request):
+    body = request.body.decode('utf-8')
+    model = JsonData.objects.create(json=body)
+    return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)
