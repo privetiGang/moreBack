@@ -1,5 +1,7 @@
-from django.db.models import Avg, Max, Min, Sum
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from base.models import Dict, MetaFields, Mts, Magazine, Adidas
 from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer, \
     MetaFieldsSerializerFilter
@@ -77,3 +79,11 @@ class FilterListViewSet(generics.ListAPIView):
     filterset_fields = ['name', 'quality', 'type']
     ordering_fields = ['date_start', 'date_finish']
 
+
+@api_view(['GET'])
+def buy_datasets(request):
+    id = request.GET.get("id")
+    model = MetaFields.objects.get(id=id)
+    model.payable = 0
+    model.save()
+    return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)
