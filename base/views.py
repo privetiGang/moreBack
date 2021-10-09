@@ -1,6 +1,7 @@
+from django.db.models import Avg, Max, Min, Sum
 from rest_framework import generics
-from base.models import Dict, MetaFields, Mts, Magazine
-from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer
+from base.models import Dict, MetaFields, Mts, Magazine, Adidas
+from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer
 from mozilla_django_oidc.views import OIDCLogoutView
 from django.conf import settings
 
@@ -51,3 +52,49 @@ class MtsListView(generics.ListAPIView):
 class MagazineListView(generics.ListAPIView):
     serializer_class = MagazineSerializer
     queryset = Magazine.objects.all()
+
+
+class AdidasListView(generics.ListAPIView):
+    serializer_class = AdidasSerializer
+    queryset = Adidas.objects.all()
+
+
+class MtstAtributeAggregateView(generics.ListAPIView):
+    serializer_class = MtsSerializer
+
+    def get_queryset(self):
+        attributes = self.request.GET.get("attributes")
+        return Mts.objects.all().aggregate(Avg(attributes))
+
+
+class MtsAttributeMaxView(generics.ListAPIView):
+    serializer_class = MtsSerializer
+
+    def get_queryset(self):
+        attributes = self.request.GET.get("attributes")
+        return Mts.objects.all().aggregate(Max("sum"))
+
+
+class MtsAttributeMinView(generics.ListAPIView):
+    serializer_class = MtsSerializer
+
+    def get_queryset(self):
+        attributes = self.request.GET.get("attributes")
+        return Mts.objects.all().aggregate(Min(attributes))
+
+
+class MtsAttributeSumView(generics.ListAPIView):
+    serializer_class = MtsSerializer
+
+    def get_queryset(self):
+        attributes = self.request.GET.get("attributes")
+        return Mts.objects.all().aggregate(Sum(attributes))
+
+
+class MagazineAttributeSortView(generics.ListAPIView):
+    serializer_class = MagazineSerializer
+
+    def get_queryset(self):
+        attributes = self.request.GET.get("attributes")
+        attributes = '-' + attributes
+        return Magazine.objects.order_by(attributes)

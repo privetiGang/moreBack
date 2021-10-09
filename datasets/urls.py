@@ -19,7 +19,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 import base
-from base.views import DictCreateView, DictDeleteView, DictListView, MetaFieldListView, MtsListView, MagazineListView
+from base.views import DictCreateView, DictDeleteView, DictListView, MetaFieldListView, MtsListView, MagazineListView, \
+    MagazineAttributeSortView, AdidasListView, MtsAttributeMaxView, MtsAttributeMinView, MtsAttributeSumView, \
+    MtstAtributeAggregateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,9 +32,15 @@ urlpatterns = [
     path("accounts/login/", mozilla_django_oidc.views.OIDCAuthenticationRequestView.as_view(), name="keylcoak_login"),
     path("accounts/logout/", base.views.LogoutView.as_view(), name="keycloak_logout"),
     path("oidc/callback/", mozilla_django_oidc.views.OIDCAuthenticationCallbackView.as_view(),
-        name="keycloak_callback"),
+         name="keycloak_callback"),
     path('metafields/', MetaFieldListView.as_view()),
     path('mts/', MtsListView.as_view()),
-    path('magazine/', MagazineListView.as_view())
+    path('adidas/', AdidasListView.as_view()),
+    path('magazine/', MagazineListView.as_view()),
+    path('magazine-dataset/sort/', MagazineAttributeSortView.as_view()),
+    path('mts-dataset/max/', MtsAttributeMaxView.as_view()),
+    path('mts-dataset/min/', MtsAttributeMinView.as_view()),
+    path('mts-dataset/sum/', MtsAttributeSumView.as_view()),
+    path('mts-dataset/avg/', MtstAtributeAggregateView.as_view()),
 
 ]

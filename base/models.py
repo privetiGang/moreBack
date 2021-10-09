@@ -26,3 +26,17 @@ class Magazine(models.Model):
     phone_number = models.TextField()
     address = models.TextField()
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
+
+class Adidas(models.Model):
+    contacts = models.TextField()
+    sum = models.IntegerField()
+    date = models.DateField()
+    sex = models.TextField()
+    age = models.IntegerField()
+    metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
+
+class TypeDataSet(models.Model):
+    adidas = models.ForeignKey(Adidas, on_delete=models.CASCADE)
+    magazine = models.ForeignKey(Magazine, on_delete=models.CASCADE)
+    mts = models.ForeignKey(Mts, on_delete=models.CASCADE)
+    type = models.IntegerField()
