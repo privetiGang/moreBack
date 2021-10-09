@@ -13,14 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import mozilla_django_oidc
+import mozilla_django_oidc.views
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from base.views import DictCreateView, DictDeleteView, DictListView
+import base
+from base.views import DictCreateView, DictDeleteView, DictListView, MetaFieldListView, MtsListView, MagazineListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/create', DictCreateView.as_view()),
     path('api/delete/<int:pk>', DictDeleteView.as_view()),
-    path('api/get/', DictListView.as_view())
+    path('api/get/', DictListView.as_view()),
+    path('oidc/', include('mozilla_django_oidc.urls')),
+    path("accounts/login/", mozilla_django_oidc.views.OIDCAuthenticationRequestView.as_view(), name="keylcoak_login"),
+    path("accounts/logout/", base.views.LogoutView.as_view(), name="keycloak_logout"),
+    path("oidc/callback/", mozilla_django_oidc.views.OIDCAuthenticationCallbackView.as_view(),
+        name="keycloak_callback"),
+    path('metafields/', MetaFieldListView.as_view()),
+    path('mts/', MtsListView.as_view()),
+    path('magazine/', MagazineListView.as_view())
+
 ]
