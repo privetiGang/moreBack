@@ -15,6 +15,14 @@ class MetaFieldsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class MetaFieldsSerializerFilter(serializers.ModelSerializer):
+    class Meta:
+        model = MetaFields
+        fields = ['name','fields', 'description', 'size', 'completenes', 'payable',
+                  'visible', 'quality']
+
+
+
 class MtsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mts
@@ -31,4 +39,3 @@ class AdidasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Adidas
         fields = '__all__'
-

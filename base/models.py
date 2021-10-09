@@ -18,7 +18,7 @@ class MetaFields(models.Model):
     payable = models.TextField()
     visible = models.BooleanField()
     quality = models.CharField(max_length=10)
-
+    type = models.TextField()
 
 class Mts(models.Model):
     contacts = models.TextField()

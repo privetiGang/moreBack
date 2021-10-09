@@ -1,9 +1,11 @@
 from django.db.models import Avg, Max, Min, Sum
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from base.models import Dict, MetaFields, Mts, Magazine, Adidas
-from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer
+from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer, \
+    MetaFieldsSerializerFilter
 from mozilla_django_oidc.views import OIDCLogoutView
 from django.conf import settings
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class DictListView(generics.ListAPIView):
@@ -66,3 +68,12 @@ class MagazineAttributeSortView(generics.ListAPIView):
         attributes = self.request.GET.get("attributes")
         attributes = '-' + attributes
         return Magazine.objects.order_by(attributes)
+
+
+class FilterListViewSet(generics.ListAPIView):
+    serializer_class = MetaFieldsSerializer
+    queryset = MetaFields.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name', 'quality', 'payable', 'type']
+    ordering_fields = ['date_start', 'date_finish']
+
