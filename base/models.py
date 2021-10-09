@@ -13,6 +13,8 @@ class MetaFields(models.Model):
     description = models.TextField()
     size = models.TextField()
     completenes = models.IntegerField()
+    payable = models.TextField()
+    visible = models.BooleanField()
 
 
 class Mts(models.Model):
@@ -35,8 +37,3 @@ class Adidas(models.Model):
     age = models.IntegerField()
     metafields = models.ForeignKey(MetaFields, on_delete=models.CASCADE)
 
-class TypeDataSet(models.Model):
-    adidas = models.ForeignKey(Adidas, on_delete=models.CASCADE)
-    magazine = models.ForeignKey(Magazine, on_delete=models.CASCADE)
-    mts = models.ForeignKey(Mts, on_delete=models.CASCADE)
-    type = models.IntegerField()

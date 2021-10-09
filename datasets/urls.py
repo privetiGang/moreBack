@@ -20,8 +20,7 @@ from django.urls import path, include
 
 import base
 from base.views import DictCreateView, DictDeleteView, DictListView, MetaFieldListView, MtsListView, MagazineListView, \
-    MagazineAttributeSortView, AdidasListView, MtsAttributeMaxView, MtsAttributeMinView, MtsAttributeSumView, \
-    MtstAtributeAggregateView, TypeDataSetView
+    MagazineAttributeSortView, AdidasListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,12 +35,6 @@ urlpatterns = [
     path('metafields/', MetaFieldListView.as_view()),
     path('mts/', MtsListView.as_view()),
     path('adidas/', AdidasListView.as_view()),
-    path('type-dataset/', TypeDataSetView.as_view()),
     path('magazine/', MagazineListView.as_view()),
     path('magazine-dataset/sort/', MagazineAttributeSortView.as_view()),
-    path('mts-dataset/max/', MtsAttributeMaxView.as_view()),
-    path('mts-dataset/min/', MtsAttributeMinView.as_view()),
-    path('mts-dataset/sum/', MtsAttributeSumView.as_view()),
-    path('mts-dataset/avg/', MtstAtributeAggregateView.as_view()),
-
 ]

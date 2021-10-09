@@ -1,8 +1,7 @@
 from django.db.models import Avg, Max, Min, Sum
 from rest_framework import generics
-from base.models import Dict, MetaFields, Mts, Magazine, Adidas, TypeDataSet
-from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer, \
-    TypeDataSetSerializer
+from base.models import Dict, MetaFields, Mts, Magazine, Adidas
+from base.serializers import DictSerializer, MetaFieldsSerializer, MtsSerializer, MagazineSerializer, AdidasSerializer
 from mozilla_django_oidc.views import OIDCLogoutView
 from django.conf import settings
 
@@ -58,43 +57,6 @@ class MagazineListView(generics.ListAPIView):
 class AdidasListView(generics.ListAPIView):
     serializer_class = AdidasSerializer
     queryset = Adidas.objects.all()
-
-
-class TypeDataSetView(generics.ListAPIView):
-    serializer_class = TypeDataSetSerializer
-    queryset = TypeDataSet.objects.all()
-
-
-class MtstAtributeAggregateView(generics.ListAPIView):
-    serializer_class = MtsSerializer
-
-    def get_queryset(self):
-        attributes = self.request.GET.get("attributes")
-        return Mts.objects.all().aggregate(Avg(attributes))
-
-
-class MtsAttributeMaxView(generics.ListAPIView):
-    serializer_class = MtsSerializer
-
-    def get_queryset(self):
-        attributes = self.request.GET.get("attributes")
-        return Mts.objects.all().aggregate(Max("sum"))
-
-
-class MtsAttributeMinView(generics.ListAPIView):
-    serializer_class = MtsSerializer
-
-    def get_queryset(self):
-        attributes = self.request.GET.get("attributes")
-        return Mts.objects.all().aggregate(Min(attributes))
-
-
-class MtsAttributeSumView(generics.ListAPIView):
-    serializer_class = MtsSerializer
-
-    def get_queryset(self):
-        attributes = self.request.GET.get("attributes")
-        return Mts.objects.all().aggregate(Sum(attributes))
 
 
 class MagazineAttributeSortView(generics.ListAPIView):

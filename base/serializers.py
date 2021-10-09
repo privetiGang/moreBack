@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from base.models import Dict, MetaFields, Mts, Magazine, Adidas, TypeDataSet
+from base.models import Dict, MetaFields, Mts, Magazine, Adidas
 
 
 class DictSerializer(serializers.ModelSerializer):
@@ -32,7 +32,3 @@ class AdidasSerializer(serializers.ModelSerializer):
         model = Adidas
         fields = '__all__'
 
-class TypeDataSetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TypeDataSet
-        fields = '__all__'
