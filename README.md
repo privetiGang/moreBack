@@ -1,43 +1,29 @@
-# Инструкция #
+# README #
 
-1. Клонирование проекта:
-	
-	```bash
-	git clone https://github.com/privetiGang/moreBack.git
-	```
+This README would normally document whatever steps are necessary to get your application up and running.
 
-2. Создание нового virtualenv:
+### What is this repository for? ###
 
-	```bash
-	pip install virtualenv
-	virtualenv venv
-	source venv/bin/activate
-	```
-	
-3. Установка пакетов:
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-	```bash
-	pip install -r requirements.txt
-	```
+### How do I get set up? ###
 
-4. Запуск:
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
+* Deployment instructions
 
-	```bash
-	python manage.py runserver
-	```
-	
-5. Доступ в админку:
+### Contribution guidelines ###
 
-	```bash
-	127.0.0.1:8000/admin
-	login: admin
-	password: 123	
-	```
+* Writing tests
+* Code review
+* Other guidelines
 
-6. URLS:
+### Who do I talk to? ###
 
-	```python
-	127.0.0.1:8000/api/create
-	127.0.0.1:8000/api/delete/<int:pk>
-	127.0.0.1:8000/api/get/?id=<id>
-	```
+* Repo owner or admin
+* Other community or team contact
