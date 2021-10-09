@@ -74,6 +74,6 @@ class FilterListViewSet(generics.ListAPIView):
     serializer_class = MetaFieldsSerializer
     queryset = MetaFields.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name', 'quality', 'payable', 'type']
+    filterset_fields = ['name', 'quality', 'type']
     ordering_fields = ['date_start', 'date_finish']
 
