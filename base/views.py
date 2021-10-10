@@ -118,3 +118,11 @@ def select_datasets(request):
         queryset = Adidas.objects.all()[:5]
         data = serializers.serialize('json', queryset)
     return HttpResponse(data, content_type="application/json")
+
+
+@api_view(['GET'])
+def delete_favourite_datasets(request):
+    id = request.GET.get("id")
+    favourite = FavouriteDatasets.objects.get(metafields_id=id)
+    favourite.delete()
+    return Response({'status': 'Успешно'}, status=status.HTTP_200_OK)

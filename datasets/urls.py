@@ -21,7 +21,7 @@ from django.urls import path, include
 import base
 from base.views import DictCreateView, DictDeleteView, DictListView, MetaFieldListView, MtsListView, MagazineListView, \
     MagazineAttributeSortView, AdidasListView, FilterListViewSet, buy_datasets, FavouriteDatasetsView, \
-    favourite_datasets, save_json, select_datasets
+    favourite_datasets, save_json, select_datasets, delete_favourite_datasets
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,5 +43,6 @@ urlpatterns = [
     path('favourite-dataset/', favourite_datasets),
     path('favourite-list/', FavouriteDatasetsView.as_view()),
     path('save-json/', save_json),
-    path('select-datasets/', select_datasets)
+    path('select-datasets/', select_datasets),
+    path('delete-favourite/', delete_favourite_datasets)
 ]
