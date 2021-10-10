@@ -37,7 +37,15 @@
 6. URLS:
 
 	```python
-	127.0.0.1:8000/api/create
-	127.0.0.1:8000/api/delete/<int:pk>
-	127.0.0.1:8000/api/get/?id=<id>
+	127.0.0.1:8000/metafields/
+	127.0.0.1:8000/mts/
+	127.0.0.1:8000/adidas/
+	127.0.0.1:8000/magazine/
+	127.0.0.1:8000/metafields-filter/?name={название}&type={Открытый}
+	127.0.0.1:8000/buy-dataset/?id={id}
+	127.0.0.1:8000/favourite-dataset/?id={id}
+	127.0.0.1:8000/favourite-list/
+	127.0.0.1:8000/save-json/ (POST запрос)
+	127.0.0.1:8000/select-datasets/?id={id}
+	127.0.0.1:8000/delete-favourite/?id={id{
 	```
