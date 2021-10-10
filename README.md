@@ -47,4 +47,5 @@
 	127.0.0.1:8000/favourite-list/
 	127.0.0.1:8000/save-json/ (POST запрос)
 	127.0.0.1:8000/select-datasets/?id={id}
+	127.0.0.1:8000/delete-favourite/?id={id{
 	```
